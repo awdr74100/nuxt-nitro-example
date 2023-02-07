@@ -1,20 +1,25 @@
 import { type IUser, User } from '@/server/models/User';
-import isLength from 'validator/es/lib/isLength';
-import isEmail from 'validator/es/lib/isEmail';
-import { hash } from 'argon2';
+import Joi from 'joi';
+import argon2 from 'argon2';
 
-export default defineEventHandler(async (e) => {
+const schema = Joi.object<Pick<IUser, 'name' | 'email' | 'password'>>({
+  name: Joi.string().alphanum().min(3).max(12).required(),
+  email: Joi.string().email().required(),
+  password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{6,16}$')).required(),
+});
+
+export default defineEventHandler(async (event) => {
   try {
-    const { name, email, password } = await readBody<IUser>(e);
+    const body = await readBody(event);
+    const { name, email, password } = await schema.validateAsync(body);
+    
+    const hashedPassword = await argon2.hash(password);
+    const tokenVersion = 0;
 
-    if (!isLength(name, { min: 1, max: 12 })) throw new Error('invalid name');
-    if (!isEmail(email)) throw new Error('invalid email');
-    if (!isLength(password, { min: 8 })) throw new Error('invalid password');
-
-    const hashedPassword = await hash(password);
-
-    await User.create({ name, email, password: hashedPassword });
+    await User.create({ name, email, password: hashedPassword, tokenVersion });
 
     return { success: true };
-  } catch (error) {}
+  } catch (error) {
+    return { success: false, message: createErrorMessage(error) };
+  }
 });

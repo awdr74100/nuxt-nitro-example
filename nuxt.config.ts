@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     shim: false,
   },
   runtimeConfig: {
-    accessTokenSecret: 'SECRET'
+    tokenSecret: 'SECRET',
+    mongodbUrl: 'mongodb://127.0.0.1:27017/demo',
   },
 });

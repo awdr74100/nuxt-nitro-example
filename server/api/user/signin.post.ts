@@ -1,26 +1,33 @@
 import { type IUser, User } from '@/server/models/User';
-import isEmail from 'validator/es/lib/isEmail';
-import isLength from 'validator/es/lib/isLength';
-import { verify } from 'argon2';
-import generateToken from '@/server/utils/generateToken';
+import Joi from 'joi';
+import argon2 from 'argon2';
 
-export default defineEventHandler(async (e) => {
+const schema = Joi.object<Pick<IUser, 'email' | 'password'>>({
+  email: Joi.string().email().required(),
+  password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{6,16}$')),
+});
+
+export default defineEventHandler(async (event) => {
   try {
-    const { email, password } = await readBody<Omit<IUser, 'name'>>(e);
-
-    if (!isEmail(email)) throw new Error('invalid email');
-    if (!isLength(password, { min: 8 })) throw new Error('invalid password');
+    const body = await readBody(event);
+    const { email, password } = await schema.validateAsync(body);
 
     const user = await User.findOne({ email }).lean();
 
-    if (!user) throw new Error('user not found');
+    if (!user) throw new Error('User not found');
 
-    const passwordMatch = await verify(user.password, password);
+    const isMatch = await argon2.verify(user.password, password);
 
-    if (!passwordMatch) throw new Error('incorrect password');
+    if (!isMatch) throw new Error('Incorrect password');
 
-    const accessToken = generateToken({ id: user._id, name: user.name }, '2h');
+    const accessToken = await createToken({ id: user._id }, '15m');
+    const refreshToken = await createToken(
+      { id: user._id, tokenVersion: user.tokenVersion },
+      '4h',
+    );
 
-    return { success: true, accessToken };
-  } catch (error) {}
+    return { success: true, accessToken, refreshToken };
+  } catch (error) {
+    return { success: false, message: createErrorMessage(error) };
+  }
 });

@@ -1,11 +1,13 @@
 import mongoose from 'mongoose';
 
 export default defineNitroPlugin(async (nitroApp) => {
+  const config = useRuntimeConfig();
+
   try {
     mongoose.set('strictQuery', false);
-    await mongoose.connect('mongodb://127.0.0.1:27017/nuxtDB');
+    await mongoose.connect(config.mongodbUrl);
 
-    console.log('● MongoDB connected');
+    console.log('● MongoDB connection established');
   } catch (error) {
     console.log(error);
   }
