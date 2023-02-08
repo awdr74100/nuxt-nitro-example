@@ -1,13 +1,9 @@
 import { createSigner } from 'fast-jwt';
-import ms from 'ms';
 
-export default (payload: object, expiresIn: string) => {
+export default (payload: object, expiresIn: number) => {
   const config = useRuntimeConfig();
 
-  const signWithPromise = createSigner({
-    key: async () => config.tokenSecret,
-    expiresIn: ms(expiresIn),
-  });
+  const sign = createSigner({ key: async () => config.tokenSecret, expiresIn });
 
-  return signWithPromise(payload);
+  return sign(payload);
 };

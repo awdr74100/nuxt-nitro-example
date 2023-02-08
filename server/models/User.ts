@@ -33,6 +33,6 @@ const userSchema = new Schema<IUser>(
   },
 );
 
-userSchema.plugin(uniqueValidator, { type: 'mongoose-unique-validator' });
+userSchema.plugin(uniqueValidator);
 
 export const User = model<IUser>('User', userSchema);
