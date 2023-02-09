@@ -38,10 +38,14 @@ export default defineEventHandler(async (event) => {
       httpOnly: true,
       sameSite: 'strict',
       maxAge: ms('4h'),
-      path: '/api/user/refresh',
+      path: '/api/user/refresh_token',
     });
 
-    return { success: true, message: '登入成功' };
+    return {
+      success: true,
+      message: '登入成功',
+      user: { id: user._id, name: user.name, email: user.email },
+    };
   } catch (error) {
     return { success: false, message: createErrorMessage(error) };
   }
