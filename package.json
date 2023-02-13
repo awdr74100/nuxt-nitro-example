@@ -13,8 +13,6 @@
   },
   "dependencies": {
     "@prisma/client": "^4.10.1",
-    "argon2": "^0.30.3",
-    "joi": "^17.7.1",
-    "jose": "^4.11.4"
+    "argon2": "^0.30.3"
   }
 }
