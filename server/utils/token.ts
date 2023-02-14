@@ -10,16 +10,20 @@ interface Payload {
 export const signToken = (type: Type, payload: Payload, exp: StringValue) => {
   const config = useRuntimeConfig();
 
-  const key = config[`${type}Secret`];
-  const expiresIn = ms(exp);
+  const signSync = createSigner({
+    key: config[`${type}Secret`],
+    expiresIn: ms(exp),
+  });
 
-  return createSigner({ key, expiresIn })(payload);
+  return signSync(payload);
 };
 
 export const verifyToken = <T extends Payload>(type: Type, token: string) => {
   const config = useRuntimeConfig();
 
-  const key = config[`${type}Secret`];
+  const verifySync = createVerifier({
+    key: config[`${type}Secret`],
+  });
 
-  return createVerifier({ key })(token) as T & { iat: number; exp: number };
+  return verifySync(token) as T & { iat: number; exp: number };
 };
