@@ -1,35 +1,28 @@
 import { createSigner, createVerifier } from 'fast-jwt';
 import ms, { type StringValue } from 'ms';
 
-type TokenType = 'accessToken' | 'refreshToken';
+type Kind = 'accessToken' | 'refreshToken';
 
-interface TokenPayload {
+interface Data {
   [key: string]: string | number | boolean;
 }
 
-export const signToken = (
-  type: TokenType,
-  payload: TokenPayload,
-  expiresIn: StringValue,
-) => {
+export const signToken = (kind: Kind, data: Data, expiresIn: StringValue) => {
   const config = useRuntimeConfig();
 
   const signSync = createSigner({
-    key: config[`${type}Secret`],
+    key: config[`${kind}Secret`],
     expiresIn: ms(expiresIn),
   });
 
-  return signSync(payload);
+  return signSync(data);
 };
 
-export const verifyToken = <T extends TokenPayload>(
-  type: TokenType,
-  token: string,
-) => {
+export const verifyToken = <T extends Data>(kind: Kind, token: string) => {
   const config = useRuntimeConfig();
 
   const verifySync = createVerifier({
-    key: config[`${type}Secret`],
+    key: config[`${kind}Secret`],
   });
 
   return verifySync(token) as T & { iat: number; exp: number };
