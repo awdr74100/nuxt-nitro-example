@@ -31,14 +31,14 @@ export default defineEventHandler(async (event) => {
       httpOnly: true,
       secure: true,
       sameSite: 'strict',
-      maxAge: ms('15m'),
+      maxAge: ms('15m') / 1000,
       path: '/',
     });
     setCookie(event, 'refreshToken', refreshToken, {
       httpOnly: true,
       secure: true,
       sameSite: 'strict',
-      maxAge: ms('4h'),
+      maxAge: ms('4h') / 1000,
       path: '/api/user/refresh_token',
     });
 
