@@ -4,13 +4,17 @@ specifiers:
   '@prisma/client': ^4.10.1
   argon2: ^0.30.3
   jose: ^4.11.4
+  ms: 3.0.0-canary.1
   nuxt: ^3.2.0
   prisma: ^4.10.1
+  zod: ^3.20.6
 
 dependencies:
   '@prisma/client': 4.10.1_prisma@4.10.1
   argon2: 0.30.3
   jose: 4.11.4
+  ms: 3.0.0-canary.1
+  zod: 3.20.6
 
 devDependencies:
   nuxt: 3.2.0
@@ -3137,6 +3141,11 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
+  /ms/3.0.0-canary.1:
+    resolution: {integrity: sha512-kh8ARjh8rMN7Du2igDRO9QJnqCb2xYTJxyQYK7vJJS4TvLLmsbyhiKpSW+t+y26gyOyMd0riphX0GeWKU3ky5g==}
+    engines: {node: '>=12.13'}
+    dev: false
+
   /mute-stream/0.0.8:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
     dev: true
@@ -4829,3 +4838,7 @@ packages:
       compress-commons: 4.1.1
       readable-stream: 3.6.0
     dev: true
+
+  /zod/3.20.6:
+    resolution: {integrity: sha512-oyu0m54SGCtzh6EClBVqDDlAYRz4jrVtKwQ7ZnsEmMI9HnzuZFj8QFwAY1M5uniIYACdGvv0PBWPF2kO0aNofA==}
+    dev: false
