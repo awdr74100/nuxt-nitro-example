@@ -1,45 +1,48 @@
-import { SignJWT, jwtVerify } from 'jose';
+import { createSigner, createVerifier } from 'fast-jwt';
+import ms, { StringValue } from 'ms';
 
-interface JWTPayload {
-  [key: string]: string | number | boolean;
+interface Payload {
+  [key: string]: unknown;
 }
 
-export const signAccessToken = (payload: JWTPayload, expiresIn: string) => {
+export const signAccessToken = (payload: Payload, expiresIn: StringValue) => {
   const config = useRuntimeConfig();
 
-  const secret = new TextEncoder().encode(config.accessTokenSecret);
+  const signSync = createSigner({
+    key: config.accessTokenSecret,
+    expiresIn: ms(expiresIn),
+  });
 
-  return new SignJWT(payload)
-    .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
-    .setIssuedAt()
-    .setExpirationTime(expiresIn)
-    .sign(secret);
+  return signSync(payload);
 };
 
-export const signRefreshToken = (payload: JWTPayload, expiresIn: string) => {
+export const signRefreshToken = (payload: Payload, expiresIn: StringValue) => {
   const config = useRuntimeConfig();
 
-  const secret = new TextEncoder().encode(config.refreshTokenSecret);
+  const signSync = createSigner({
+    key: config.refreshTokenSecret,
+    expiresIn: ms(expiresIn),
+  });
 
-  return new SignJWT(payload)
-    .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
-    .setIssuedAt()
-    .setExpirationTime(expiresIn)
-    .sign(secret);
+  return signSync(payload);
 };
 
-export const verifyAccessToken = (token: string) => {
+export const verifyAccessToken = <T extends Payload>(token: string) => {
   const config = useRuntimeConfig();
 
-  const secret = new TextEncoder().encode(config.accessTokenSecret);
+  const verifySync = createVerifier({
+    key: config.accessTokenSecret,
+  });
 
-  return jwtVerify(token, secret);
+  return verifySync(token) as T & { iat: number; exp: number };
 };
 
-export const verifyRefreshToken = (token: string) => {
+export const verifyRefreshToken = <T extends Payload>(token: string) => {
   const config = useRuntimeConfig();
 
-  const secret = new TextEncoder().encode(config.refreshTokenSecret);
+  const verifySync = createVerifier({
+    key: config.refreshTokenSecret,
+  });
 
-  return jwtVerify(token, secret);
+  return verifySync(token) as T & { iat: number; exp: number };
 };
