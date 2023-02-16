@@ -28,8 +28,8 @@ enum Role {
 }
 
 type OAuthProvider {
-  name        String
-  uid         String?
+  from        String
+  id          String?
   avatar      String?
   displayName String?
 }
