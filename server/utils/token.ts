@@ -1,48 +1,49 @@
-import { createSigner, createVerifier } from 'fast-jwt';
-import ms, { StringValue } from 'ms';
+import { SignJWT, jwtVerify } from 'jose';
 
-interface Payload {
-  [key: string]: unknown;
+interface JWTPayload {
+  [propName: string]: unknown;
 }
 
-export const signAccessToken = (payload: Payload, expiresIn: StringValue) => {
+export const signAccessToken = (payload: JWTPayload, expiresIn: string) => {
   const config = useRuntimeConfig();
 
-  const signSync = createSigner({
-    key: config.accessTokenSecret,
-    expiresIn: ms(expiresIn),
-  });
+  const secret = new TextEncoder().encode(config.accessTokenSecret);
 
-  return signSync(payload);
+  return new SignJWT(payload)
+    .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
+    .setIssuedAt()
+    .setExpirationTime(expiresIn)
+    .sign(secret);
 };
 
-export const signRefreshToken = (payload: Payload, expiresIn: StringValue) => {
+export const signRefreshToken = (payload: JWTPayload, expiresIn: string) => {
   const config = useRuntimeConfig();
 
-  const signSync = createSigner({
-    key: config.refreshTokenSecret,
-    expiresIn: ms(expiresIn),
-  });
+  const secret = new TextEncoder().encode(config.refreshTokenSecret);
 
-  return signSync(payload);
+  return new SignJWT(payload)
+    .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
+    .setIssuedAt()
+    .setExpirationTime(expiresIn)
+    .sign(secret);
 };
 
-export const verifyAccessToken = <T extends Payload>(token: string) => {
+export const verifyAccessToken = <T extends JWTPayload>(token: string) => {
   const config = useRuntimeConfig();
 
-  const verifySync = createVerifier({
-    key: config.accessTokenSecret,
-  });
+  const secret = new TextEncoder().encode(config.accessTokenSecret);
 
-  return verifySync(token) as T & { iat: number; exp: number };
+  return jwtVerify(token, secret).then(
+    ({ payload }) => payload as T & { iat: number; exp: number },
+  );
 };
 
-export const verifyRefreshToken = <T extends Payload>(token: string) => {
+export const verifyRefreshToken = <T extends JWTPayload>(token: string) => {
   const config = useRuntimeConfig();
 
-  const verifySync = createVerifier({
-    key: config.refreshTokenSecret,
-  });
+  const secret = new TextEncoder().encode(config.refreshTokenSecret);
 
-  return verifySync(token) as T & { iat: number; exp: number };
+  return jwtVerify(token, secret).then(
+    ({ payload }) => payload as T & { iat: number; exp: number },
+  );
 };
