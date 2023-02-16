@@ -11,15 +11,15 @@ datasource db {
 }
 
 model User {
-  id                  String          @id @default(auto()) @map("_id") @db.ObjectId
-  role                Role            @default(USER)
-  email               String          @unique
-  username            String          @unique
-  password            String
-  refreshTokenVersion Int             @default(0) @db.Int
-  oauthProviders      OAuthProvider[]
-  createdAt           DateTime        @default(now())
-  updatedAt           DateTime        @updatedAt
+  id                        String          @id @default(auto()) @map("_id") @db.ObjectId
+  role                      Role            @default(USER)
+  email                     String          @unique
+  username                  String          @unique
+  password                  String
+  oauthProviders            OAuthProvider[]
+  activeRefreshTokenVersion Int             @default(0) @db.Long
+  createdAt                 DateTime        @default(now())
+  updatedAt                 DateTime        @updatedAt
 }
 
 enum Role {
@@ -28,8 +28,13 @@ enum Role {
 }
 
 type OAuthProvider {
-  from        String
-  id          String?
-  avatar      String?
-  displayName String?
+  source   String
+  protocol String
+  userinfo OAuthUserInfo
+}
+
+type OAuthUserInfo {
+  id      String
+  name    String
+  picture String
 }
