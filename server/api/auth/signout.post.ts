@@ -1,8 +1,11 @@
 export default defineEventHandler(async (event) => {
   const clearCookie = () => {
-    deleteCookie(event, 'accessToken', { sameSite: 'strict', path: '/' });
+    deleteCookie(event, 'accessToken', {
+      // sameSite: 'strict',
+      path: '/',
+    });
     deleteCookie(event, 'refreshToken', {
-      sameSite: 'strict',
+      // sameSite: 'strict',
       path: '/api/auth/refresh_token',
     });
   };

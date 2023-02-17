@@ -1,5 +1,5 @@
 import type { User } from '@prisma/client';
-import { date, z } from 'zod';
+import { z } from 'zod';
 import { verify } from 'argon2';
 
 export default defineEventHandler(async (event) => {
