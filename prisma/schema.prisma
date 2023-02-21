@@ -17,7 +17,7 @@ model User {
   username                  String          @unique
   password                  String
   oauthProviders            OAuthProvider[]
-  activeRefreshTokenVersion Int             @default(0) @db.Long
+  activeRefreshTokenVersion Int             @default(0) @db.Int
   createdAt                 DateTime        @default(now())
   updatedAt                 DateTime        @updatedAt
 }
