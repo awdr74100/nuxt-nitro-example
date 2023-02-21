@@ -1,4 +1,3 @@
-import type { User } from '@prisma/client';
 import { z } from 'zod';
 import { verify } from 'argon2';
 
@@ -67,8 +66,6 @@ export default defineEventHandler(async (event) => {
 
     return { success: true, message: '登入成功', user: filteredUser };
   } catch (error) {
-    console.log(error);
-
     return { success: false };
   }
 });
