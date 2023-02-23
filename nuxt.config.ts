@@ -6,5 +6,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     accessTokenSecret: 'SECRET',
     refreshTokenSecret: 'SECRET',
+    imgurClientId: 'ID',
+    imgurClientSecret: 'SECRET',
+    imgurRefreshToken: 'TOKEN',
   },
 });
