@@ -22,6 +22,8 @@ export default defineEventHandler(async (event) => {
     const body = await readBody(event);
     const { title, price } = await bodySchema.parseAsync(body);
 
+    if (!title && !price) throw new Error(); // avoid operate database
+
     const prisma = usePrismaClient();
 
     const product = await prisma.product.update({
