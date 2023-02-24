@@ -1,3 +1,5 @@
+import { RequestError } from 'got';
+
 export default defineEventHandler(async (event) => {
   try {
     const data = await readMultipartFormData(event);
@@ -10,8 +12,9 @@ export default defineEventHandler(async (event) => {
 
     return { success: true, message: '上傳成功', links };
   } catch (error) {
-    // @ts-ignore
-    console.log(error.response.statusCode);
+    if (error instanceof RequestError) {
+      console.log(error.response?.statusCode);
+    }
 
     return { success: false };
   }

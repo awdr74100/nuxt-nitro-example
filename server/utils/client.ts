@@ -5,7 +5,9 @@ import type { MultiPartData } from 'h3';
 let _prisma: PrismaClient;
 
 export const usePrismaClient = () => {
-  if (!_prisma) _prisma = new PrismaClient();
+  if (!_prisma) {
+    _prisma = new PrismaClient();
+  }
 
   return _prisma;
 };
