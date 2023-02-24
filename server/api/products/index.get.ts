@@ -4,7 +4,7 @@ export default defineEventHandler(async (event) => {
 
     const products = await prisma.product.findMany();
 
-    return { success: true, products };
+    return { success: true, message: '商品查詢成功', products };
   } catch (error) {
     return { success: false };
   }
