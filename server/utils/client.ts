@@ -19,9 +19,9 @@ export const useImgurClient = () => {
     return got
       .post('https://api.imgur.com/oauth2/token', {
         json: {
-          client_id: config.imgurClientId,
-          client_secret: config.imgurClientSecret,
-          refresh_token: config.imgurRefreshToken,
+          client_id: config.IMGUR_CLIENT_ID,
+          client_secret: config.IMGUR_CLIENT_SECRET,
+          refresh_token: config.IMGUR_REFRESH_TOKEN,
           grant_type: 'refresh_token',
         },
         retry: {
