@@ -1,7 +1,5 @@
 export default defineEventHandler(async (event) => {
   try {
-    console.log(getCookie(event, 'accessToken'));
-    console.log(getCookie(event, 'refreshToken'));
     const { id, version } = await verifyRefreshToken<{
       id: string;
       version: number;

@@ -15,9 +15,9 @@ export const usePrismaClient = () => {
 let _imgurAccessToken: string;
 
 export const useImgurClient = () => {
-  const generateAccessToken = () => {
-    const config = useRuntimeConfig();
+  const config = useRuntimeConfig();
 
+  const getAccessToken = () => {
     return got
       .post('https://api.imgur.com/oauth2/token', {
         json: {
@@ -34,41 +34,41 @@ export const useImgurClient = () => {
       .then(({ access_token }) => access_token);
   };
 
-  const upload = async (multiPartDataArray: MultiPartData[]) => {
-    if (!_imgurAccessToken) {
-      _imgurAccessToken = await generateAccessToken();
-    }
+  return {
+    async upload(files: MultiPartData[]) {
+      if (!_imgurAccessToken) {
+        _imgurAccessToken = await getAccessToken();
+      }
 
-    return Promise.all(
-      multiPartDataArray.map(({ data }) => {
-        return got
-          .post('https://api.imgur.com/3/image', {
-            headers: {
-              Authorization: `Bearer ${_imgurAccessToken}`,
-            },
-            json: {
-              image: data.toString('base64'),
-            },
-            retry: {
-              limit: 1,
-              methods: ['POST'],
-              statusCodes: [403],
-            },
-            hooks: {
-              beforeRetry: [
-                async (error) => {
-                  if (error.response?.statusCode === 403) {
-                    _imgurAccessToken = await generateAccessToken();
-                  }
-                },
-              ],
-            },
-          })
-          .json<{ data: { link: string } }>()
-          .then(({ data }) => data.link);
-      }),
-    );
+      return Promise.all(
+        files.map(({ data: buffer }) => {
+          return got
+            .post('https://api.imgur.com/3/image', {
+              headers: {
+                Authorization: `Bearer ${_imgurAccessToken}`,
+              },
+              json: {
+                image: buffer.toString('base64'),
+              },
+              retry: {
+                limit: 1,
+                methods: ['POST'],
+                statusCodes: [403],
+              },
+              hooks: {
+                beforeRetry: [
+                  async (error) => {
+                    if (error.response?.statusCode === 403) {
+                      _imgurAccessToken = await getAccessToken();
+                    }
+                  },
+                ],
+              },
+            })
+            .json<{ data: { link: string } }>()
+            .then(({ data }) => data.link);
+        }),
+      );
+    },
   };
-
-  return { upload };
 };
