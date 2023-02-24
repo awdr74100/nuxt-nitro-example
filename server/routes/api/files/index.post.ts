@@ -1,5 +1,11 @@
+import type { Role } from '@prisma/client';
+
 export default defineEventHandler(async (event) => {
   try {
+    const user = await useAuth<{ role: Role }>(event);
+
+    if (user.role !== 'ADMIN') throw new Error();
+
     const files = await readMultipartFormData(event);
 
     if (!files || !files.length) throw new Error();
