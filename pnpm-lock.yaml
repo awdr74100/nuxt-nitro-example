@@ -7,6 +7,7 @@ specifiers:
   jose: ^4.12.0
   nuxt: ^3.2.2
   prisma: ^4.10.1
+  requrl: ^3.0.2
   zod: ^3.20.6
 
 dependencies:
@@ -14,6 +15,7 @@ dependencies:
   argon2: 0.30.3
   got: 12.5.3
   jose: 4.12.0
+  requrl: 3.0.2
   zod: 3.20.6
 
 devDependencies:
@@ -4114,6 +4116,10 @@ packages:
   /requires-port/1.0.0:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
     dev: true
+
+  /requrl/3.0.2:
+    resolution: {integrity: sha512-f3gjR6d8MhOpn46PP+DSJywbmxi95fxQm3coXBFwognjFLla9X6tr8BdNyaIKNOEkaRbRcm0/zYAqN19N1oyhg==}
+    dev: false
 
   /resolve-alpn/1.2.1:
     resolution: {integrity: sha512-0a1F4l73/ZFZOakJnQ3FvkJ2+gSTQWz/r2KE5OdDY0TxPm5h4GkqkWWfM47T7HsbnOtcJVEF4epCVy6u7Q3K+g==}
