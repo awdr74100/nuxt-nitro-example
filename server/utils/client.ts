@@ -1,6 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 import got from 'got';
-import type { MultiPartData } from 'h3';
+import { auth } from '@googleapis/oauth2';
+import getURL from 'requrl';
+import type { MultiPartData, H3Event } from 'h3';
 
 let _prisma: PrismaClient;
 
@@ -71,4 +73,14 @@ export const useImgurClient = () => {
       );
     },
   };
+};
+
+export const useGoogleOAuth2Client = (event: H3Event) => {
+  const config = useRuntimeConfig();
+
+  return new auth.OAuth2(
+    config.GCP_OAUTH_CLIENT_ID,
+    config.GCP_OAUTH_CLIENT_SECRET,
+    `${getURL(event.node.req)}/oauth/google/callback`,
+  );
 };
