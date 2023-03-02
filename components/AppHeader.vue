@@ -46,7 +46,7 @@ const route = useRoute();
   display: inline-block;
   width: 47px;
   height: 47px;
-  background-image: url(https://nuxt.com/assets/design-kit/logo/icon-white.svg);
+  background-image: url('~/assets/img/logo.svg');
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;

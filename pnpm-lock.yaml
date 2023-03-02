@@ -6,7 +6,7 @@ specifiers:
   '@prisma/client': ^4.11.0
   argon2: ^0.30.3
   got: ^12.5.3
-  jose: ^4.13.0
+  jose: ^4.13.1
   nuxt: ^3.2.3
   prisma: ^4.11.0
   requrl: ^3.0.2
@@ -18,7 +18,7 @@ dependencies:
   '@prisma/client': 4.11.0_prisma@4.11.0
   argon2: 0.30.3
   got: 12.5.3
-  jose: 4.13.0
+  jose: 4.13.1
   requrl: 3.0.2
   zod: 3.20.6
 
@@ -1607,13 +1607,13 @@ packages:
   /@types/node-fetch/2.6.2:
     resolution: {integrity: sha512-DHqhlq5jeESLy19TYhLakJ07kNumXWjcDdxXsLUMJZ6ue8VZJj4kLPQVE/2mdHh3xZziNF1xppu5lwmS53HR+A==}
     dependencies:
-      '@types/node': 18.14.2
+      '@types/node': 18.14.4
       form-data: 3.0.1
     dev: true
     optional: true
 
-  /@types/node/18.14.2:
-    resolution: {integrity: sha512-1uEQxww3DaghA0RxqHx0O0ppVlo43pJhepY51OxuQIKHpjbnYLA7vcdwioNPzIqmC2u3I/dmylcqjlh0e7AyUA==}
+  /@types/node/18.14.4:
+    resolution: {integrity: sha512-VhCw7I7qO2X49+jaKcAUwi3rR+hbxT5VcYF493+Z5kMLI0DL568b7JI4IDJaxWFH0D/xwmGJNoXisyX+w7GH/g==}
     dev: true
     optional: true
 
@@ -1624,7 +1624,7 @@ packages:
   /@types/tunnel/0.0.3:
     resolution: {integrity: sha512-sOUTGn6h1SfQ+gbgqC364jLFBw2lnFqkgF3q0WovEHRLMrVD1sd5aufqi/aJObLekJO+Aq5z646U4Oxy6shXMA==}
     dependencies:
-      '@types/node': 18.14.2
+      '@types/node': 18.14.4
     dev: true
     optional: true
 
@@ -3509,8 +3509,8 @@ packages:
     hasBin: true
     dev: true
 
-  /jose/4.13.0:
-    resolution: {integrity: sha512-v6BN7fuPVfG9XIxcPT2jzyAg5EmA/mtNeJEXJ7d31Wz7fFOqOZeN8mPtNJYQmnuAIxJII7EcURcbZ7qXs9a4kA==}
+  /jose/4.13.1:
+    resolution: {integrity: sha512-MSJQC5vXco5Br38mzaQKiq9mwt7lwj2eXpgpRyQYNHYt2lq1PjkWa7DLXX0WVcQLE9HhMh3jPiufS7fhJf+CLQ==}
     dev: false
 
   /js-tokens/4.0.0:
