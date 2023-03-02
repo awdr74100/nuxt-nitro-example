@@ -12,4 +12,15 @@ export default defineNuxtConfig({
     IMGUR_CLIENT_SECRET: 'SECRET',
     IMGUR_REFRESH_TOKEN: 'TOKEN',
   },
+  app: {
+    // head: {
+    //   title: 'Nuxt & Nitro Demo',
+    //   meta: [
+    //     {
+    //       name: 'description',
+    //       content: 'My amazing site',
+    //     },
+    //   ],
+    // },
+  },
 });

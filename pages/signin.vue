@@ -1,4 +1,6 @@
 <template>
+  <Title>會員登入</Title>
+
   <h1>會員登入</h1>
   <form action="#" @submit.prevent="signin">
     <div class="mt-3">
