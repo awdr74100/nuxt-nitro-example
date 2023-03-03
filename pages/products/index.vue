@@ -30,10 +30,6 @@ useSeoMeta({
 
 const route = useRoute();
 
-const delay = () => new Promise((resolve) => setTimeout(resolve, 5000));
-
-await delay();
-
 const { data, refresh } = await useFetch('/api/products', {
   pick: ['products'],
 });
