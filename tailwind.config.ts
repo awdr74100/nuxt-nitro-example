@@ -4,6 +4,7 @@ export default <Partial<Config>>{
   theme: {
     extend: {
       colors: {},
+      backgroundImage: {},
     },
   },
 };
