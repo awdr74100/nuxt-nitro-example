@@ -7,6 +7,7 @@
     "signin",
     "signout",
     "nuxtjs",
-    "tailwindcss"
+    "tailwindcss",
+    "pinia"
   ]
 }

@@ -27,5 +27,9 @@ const routes = [
     path: '/products',
     name: '全部商品',
   },
+  {
+    path: '/signin',
+    name: "登入"
+  }
 ];
 </script>

@@ -17,10 +17,12 @@
   "dependencies": {
     "@googleapis/oauth2": "^1.0.0",
     "@googleapis/people": "^3.0.2",
+    "@pinia/nuxt": "^0.4.7",
     "@prisma/client": "^4.11.0",
     "argon2": "^0.30.3",
     "got": "^12.6.0",
     "jose": "^4.13.1",
+    "pinia": "^2.0.32",
     "requrl": "^3.0.2",
     "zod": "^3.20.6"
   }
