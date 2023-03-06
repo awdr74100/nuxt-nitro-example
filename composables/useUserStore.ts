@@ -1,4 +1,4 @@
-export const useUserStore = defineStore('user', () => {
+export default defineStore('user', () => {
   const id = ref<null | string>(null);
   const email = ref<null | string>(null);
 
@@ -15,6 +15,7 @@ export const useUserStore = defineStore('user', () => {
     if (success && user) {
       id.value = user.id;
       email.value = user.email;
+      console.log(user);
     }
   };
 
