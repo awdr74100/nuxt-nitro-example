@@ -40,3 +40,7 @@ npm run preview
 ```
 
 Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+
+## Live Demo
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b9075c95-3ea5-4dd7-b0af-b83f886d1ffc/deploy-status)](https://app.netlify.com/sites/quiet-medovik-a35674/deploys)
