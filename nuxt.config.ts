@@ -11,6 +11,9 @@ export default defineNuxtConfig({
     IMGUR_CLIENT_ID: 'ID',
     IMGUR_CLIENT_SECRET: 'SECRET',
     IMGUR_REFRESH_TOKEN: 'TOKEN',
+    NEWEBPAY_MERCHANT_ID: 'ID',
+    NEWEBPAY_HASH_KEY: 'KEY',
+    NEWEBPAY_HASH_IV: 'IV',
   },
   app: {
     // head: {

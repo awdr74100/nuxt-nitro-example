@@ -6,22 +6,31 @@
       action="#"
       @submit.prevent="user.signIn(usernameOrEmail, password)"
     >
-      <label for="usernameOrEmail">用戶名稱或信箱：</label>
-      <input
-        type="text"
-        id="usernameOrEmail"
-        placeholder="username or email..."
-        class="text-green-600"
-        v-model="usernameOrEmail"
-      />
-      <label for="password">密碼：</label>
-      <input
-        type="password"
-        class="text-green-600"
-        placeholder="password..."
-        v-model="password"
-      />
-      <button type="submit" class="border-2 border-red-400">登入</button>
+      <div>
+        <label for="usernameOrEmail">用戶名稱或信箱：</label>
+        <input
+          type="text"
+          id="usernameOrEmail"
+          placeholder="請輸入用戶名稱或信箱"
+          class="rounded-sm px-1.5 py-1 text-black"
+          v-model="usernameOrEmail"
+        />
+      </div>
+      <div class="mt-2">
+        <label for="password">密碼：</label>
+        <input
+          type="password"
+          class="rounded-sm px-1.5 py-1 text-black"
+          placeholder="請輸入密碼"
+          v-model="password"
+        />
+      </div>
+      <button
+        type="submit"
+        class="mt-2 rounded-sm bg-green-700 px-2 py-1 hover:bg-green-900"
+      >
+        登入
+      </button>
     </form>
 
     <p v-if="user.id">{{ user.id }}</p>

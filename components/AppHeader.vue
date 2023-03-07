@@ -29,7 +29,11 @@ const routes = [
   },
   {
     path: '/signin',
-    name: "登入"
-  }
+    name: '登入',
+  },
+  {
+    path: '/checkout',
+    name: '結帳',
+  },
 ];
 </script>

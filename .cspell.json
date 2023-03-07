@@ -8,6 +8,7 @@
     "signout",
     "nuxtjs",
     "tailwindcss",
-    "pinia"
+    "pinia",
+    "newebpay"
   ]
 }
